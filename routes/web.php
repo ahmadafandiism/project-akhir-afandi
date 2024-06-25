@@ -7,6 +7,8 @@ use App\Http\Controllers\ControlDeviceController;
 use App\Http\Controllers\ControlDeviceStatusController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SensorDataController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -87,6 +89,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/rainfall-page', function () {
             return view('rainfall');
         })->name('rainfall.page');
+
+        Route::post('/sensor-data', [SensorDataController::class, 'store']);
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::post('/submit-data', [SensorDataController::class, 'store']);
     });
 });
 
